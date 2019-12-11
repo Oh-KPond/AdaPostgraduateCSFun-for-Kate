@@ -54,7 +54,7 @@ function sameFrequency(num1, num2){
 sameFrequency(182, 218)
 sameFrequency(34, 14)
 sameFrequency(9998, 8999)
-sameFrequency(0, 000) 
+// sameFrequency(0, 000) Turns out the '000' is not a number.
 // There's a bug here to deal with. I believe that it has to do with the toString function.
 sameFrequency(3589578, 5879385)
 
