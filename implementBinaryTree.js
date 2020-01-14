@@ -19,7 +19,9 @@ class BinarySearchTree {
             return this
         } 
         let current = this.root
-        while(true){
+
+        let cont = true
+        while(cont){
             if (node.data == current.data) {
                 return "can not insert duplicate"
             }
@@ -66,10 +68,47 @@ class BinarySearchTree {
             return "node not found"
         }
     }
+
+    bfs(){
+        let data = []
+        let queue = []
+        let current = this.root
+
+        if (this.root == null){
+            return data
+        } else {
+            queue.push(current)
+        } 
+
+        while (queue.length){
+            current = queue.shift()
+            
+            data.push(current.data)
+
+            if (current.left != null){
+                queue.push(current.left)
+            }
+            
+            if (current.right != null){
+                queue.push(current.right)
+            }
+        }
+
+        return data
+    }
+
+    dfs(){
+
+    }
 }
 let tree = new BinarySearchTree()
 console.log(tree)
 
+//         10
+//     5       13
+//   2   7   11  16
+
+// Create tree
 console.log(tree.insert(10))
 console.log(tree.insert(5))
 console.log(tree.insert(13))
@@ -77,6 +116,13 @@ console.log(tree.insert(11))
 console.log(tree.insert(2))
 console.log(tree.insert(16))
 console.log(tree.insert(7))
+
+// Insert duplicate test
 console.log(tree.insert(5))
+
+// Find unknown test
 console.log(tree.find(8))
+
+// BFS
+console.log(tree.bfs())
 
