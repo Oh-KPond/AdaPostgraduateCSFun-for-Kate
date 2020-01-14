@@ -42,32 +42,35 @@ class BinarySearchTree {
             }
         }
     }
+    // TODO: Find is not working if there is only one node in the tree
+    // find(data){
+    //     let current = this.root
+    //     let found = false
 
-    find(data){
-        if (this.root == null) return false
+    //     if (current == null){
+    //         return false
+    //     } 
 
-        let current = this.root
-        let found = false
+    //     while(!found && current){
 
-        while(!found && current){
-            if (current.data == data){
-                found = true
-                return current
-            }
+    //         if (current.data == data){
+    //             found = true
+    //             return current
+    //         }
 
-            if(data < current.data){
-                current = current.left
-            }
+    //         if(data < current.data){
+    //             current = current.left
+    //         }
 
-            if(data > current.data){
-                current = current.right
-            }
-        }
+    //         if(data > current.data){
+    //             current = current.right
+    //         }
+    //     }
 
-        if (!found){
-            return "node not found"
-        }
-    }
+    //     if (!found){
+    //         return "node not found"
+    //     }
+    // }
 
     bfs(){
         let data = []
@@ -97,9 +100,30 @@ class BinarySearchTree {
         return data
     }
 
-    dfs(){
+    dfsPreOrder(){
+        let data = []
+        let current = this.root
 
+        if (current == null){
+            return data
+        }
+
+        function dfsHelper(node){
+            data.push(node.data)
+            if (node.left){
+                dfsHelper(node.left)
+            }
+            if (node.right){
+                dfsHelper(node.right)
+            }
+        }
+
+        dfsHelper(current)
+
+        return data
     }
+
+    
 }
 let tree = new BinarySearchTree()
 console.log(tree)
@@ -121,8 +145,10 @@ console.log(tree.insert(7))
 console.log(tree.insert(5))
 
 // Find unknown test
-console.log(tree.find(8))
+// console.log(tree.find(8))
 
 // BFS
 console.log(tree.bfs())
 
+// DFS PreOrder (Root before children)
+console.log(tree.dfsPreOrder())
