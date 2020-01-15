@@ -123,6 +123,28 @@ class BinarySearchTree {
         return data
     }
 
+    dfsPostOrder(){
+        let data = []
+        let current = this.root
+
+        if (current == null){
+            return data
+        }
+
+        function dfsHelper(node){
+            if (node.left){
+                dfsHelper(node.left)
+            }
+            if (node.right){
+                dfsHelper(node.right)
+            }
+            data.push(node.data)
+        }
+
+        dfsHelper(current)
+
+        return data
+    }
     
 }
 let tree = new BinarySearchTree()
@@ -152,3 +174,6 @@ console.log(tree.bfs())
 
 // DFS PreOrder (Root before children)
 console.log(tree.dfsPreOrder())
+
+// DFS PostOrder (Children before root)
+console.log(tree.dfsPostOrder())
