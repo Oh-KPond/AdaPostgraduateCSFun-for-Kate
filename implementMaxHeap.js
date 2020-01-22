@@ -43,6 +43,7 @@ class MaxHeap {
     const length = this.store.length
     const data = this.store[0]
 
+    // eslint-disable-next-line no-constant-condition
     while(true){
         let leftChildIdx = 2 * index + 1
         let rightChildInx = 2 * index + 2
