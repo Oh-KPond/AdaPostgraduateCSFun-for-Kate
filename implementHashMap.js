@@ -28,16 +28,42 @@ class Hash {
         let index = this._hash(key)
         if (this.keyMap[index]){
             if (this.keyMap[index].length == 1) {
-                return this.keyMap[index]
+                return this.keyMap[index][0][1]
             } else {
                 this.keyMap[index].forEach(array => {
                     if (array[0] == key){
-                        return this.keyMap[index]
+                        return this.keyMap[index][0][1]
                     }
                 });
             }
         return "key not found"
         }
+    }
+
+    keys() {
+        let keysArr = []
+        for(let i = 0; i < this.keyMap.length; i++) {
+            if(this.keyMap[i]){
+                for(let j = 0; j < this.keyMap[i].length; j++){
+                   keysArr.push(this.keyMap[i][j][0])
+                }
+            }
+        }
+        return keysArr;
+    }
+    
+    values(){
+        let valuesArr = []
+        for(let i = 0; i < this.keyMap.length; i++) {
+            if(this.keyMap[i]){
+                for(let j = 0; j < this.keyMap[i].length; j++){
+                    if(!valuesArr.includes(this.keyMap[i][j][1])){
+                        valuesArr.push(this.keyMap[i][j][1])
+                    }
+                }
+            }
+        }
+        return valuesArr;
     }
 }
 
@@ -49,3 +75,5 @@ console.log(myHash.set("blue", "yours"))
 console.log(myHash.get("this"))
 console.log(myHash.get("blue"))
 console.log(myHash.get("pink"))
+console.log(myHash.values())
+console.log(myHash.keys())
