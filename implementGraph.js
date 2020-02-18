@@ -32,6 +32,46 @@ class Graph {
         });
         delete this.adjacencyList[node]
     }
+
+    // bfs(node){
+    //     let queue = []
+    //     let visitedNodes = []
+
+    //     while(this.adjacencyList.length <= visitedNodes.length){
+    //         // choose a node to start with
+    //         // if found, return node
+    //         return null
+    //     }
+
+    //     return "Node not found"
+    // }
+
+    dfsRecurisve(start, toFind){
+        let visitedNodes = {};
+        let results = []
+        const adjacencyList = this.adjacencyList;
+
+        (function dfs(node){
+            if(!node) return null
+            
+            visitedNodes[node] = true
+            if (node == toFind){
+                results.push(node)
+            }
+            
+            adjacencyList[node].forEach( neighbor => {
+                if(!visitedNodes[neighbor]){
+                    dfs(neighbor);
+                }
+            })
+        })(start)
+        
+        if(results.length == 0){
+            return "Node not found"
+        } else {
+            return results
+        }
+    }
 }   
 
 
@@ -57,3 +97,6 @@ myGraph.addEdge("SEA", "FBX")
 myGraph.addEdge("FBX", "ANC")
 myGraph.addEdge("LAX", "SEA")
 console.log(myGraph)
+
+console.log(myGraph.dfsRecurisve("FBX", "SEA"))
+console.log(myGraph.dfsRecurisve("FBX", "ATL"))
