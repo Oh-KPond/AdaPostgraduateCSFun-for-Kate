@@ -72,6 +72,34 @@ class Graph {
             return results
         }
     }
+
+    dfs(start, toFind){
+        let visitedNodes = {};
+        let stack = []
+        // let results = []
+        const adjacencyList = this.adjacencyList;
+
+        stack.push(start)
+
+        while(stack.length > 0){
+            let node = stack.pop()
+
+            if(!visitedNodes[node]){
+                visitedNodes[node] = true
+                if(node == toFind){
+                    // results.push(node)
+                    return node
+                }
+
+                adjacencyList[node].forEach(neighbor => {
+                    stack.push(neighbor)
+                })
+            }
+        }
+
+        return "Node not found!"
+
+    }
 }   
 
 
@@ -100,3 +128,6 @@ console.log(myGraph)
 
 console.log(myGraph.dfsRecurisve("FBX", "SEA"))
 console.log(myGraph.dfsRecurisve("FBX", "ATL"))
+
+console.log(myGraph.dfs("FBX", "ANC"))
+console.log(myGraph.dfs("FBX", "ATL"))
