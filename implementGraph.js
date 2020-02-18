@@ -33,18 +33,30 @@ class Graph {
         delete this.adjacencyList[node]
     }
 
-    // bfs(node){
-    //     let queue = []
-    //     let visitedNodes = []
+    bfs(start, toFind){
+        let queue = [start];
+        let currentNode;
+        let visitedNodes = {};
+        const adjacencyList = this.adjacencyList;
 
-    //     while(this.adjacencyList.length <= visitedNodes.length){
-    //         // choose a node to start with
-    //         // if found, return node
-    //         return null
-    //     }
+        while(queue.length > 0){
+            currentNode = queue.shift()
 
-    //     return "Node not found"
-    // }
+            if(!visitedNodes[currentNode]){
+                if(currentNode == toFind){
+                    return currentNode
+                }
+                visitedNodes[currentNode] = true
+                adjacencyList[currentNode].forEach(neighbor => {
+                    if(!visitedNodes[neighbor]){
+                        queue.push(neighbor)
+                    }
+                })
+            }
+        }
+
+        return "Node not found"
+    }
 
     dfsRecurisve(start, toFind){
         let visitedNodes = {};
@@ -131,3 +143,6 @@ console.log(myGraph.dfsRecurisve("FBX", "ATL"))
 
 console.log(myGraph.dfs("FBX", "ANC"))
 console.log(myGraph.dfs("FBX", "ATL"))
+
+console.log(myGraph.bfs("FBX", "ORD"))
+console.log(myGraph.bfs("FBX", "ATL"))
